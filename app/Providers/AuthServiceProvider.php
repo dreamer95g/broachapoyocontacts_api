@@ -47,6 +47,9 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         Passport::routes();
 
+        //esto da sus bateos hay q dejarlo comentareado
+        //en deploy ejecutar
+        //passport:keys o passport:install hasta que coja
         //Passport::loadKeysFrom(__DIR__ . '/storage');
     }
 }
