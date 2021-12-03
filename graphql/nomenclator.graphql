@@ -1,0 +1,93 @@
+type Role {
+    id: ID!
+    name: String!
+}
+
+type Agency {
+    id: ID!
+    name: String!
+}
+
+type Category {
+    id: ID!
+    name: String!
+}
+
+type TrackingType {
+    id: ID!
+    name: String!
+}
+
+extend type Mutation {
+    #ROLE
+    createRole(name: String!): Role
+        @create
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    updateRole(id: ID!, name: String!): Role
+        @update
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    deleteRole(id: ID!): Role
+        @delete
+        @guard(with: ["api"])
+        @can(ability: "delete")
+
+    #AGENCY
+    createAgency(name: String!): Agency
+        @create
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    updateAgency(id: ID!, name: String!): Agency
+        @update
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    deleteAgency(id: ID!): Agency
+        @delete
+        @guard(with: ["api"])
+        @can(ability: "delete")
+
+    #CATEGORY
+    createCategory(name: String!): Category
+        @create
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    updateCategory(id: ID!, name: String!): Category
+        @update
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    deleteCategory(id: ID!): Category
+        @delete
+        @guard(with: ["api"])
+        @can(ability: "delete")
+
+    #AGENCY
+    createTrackingType(name: String!): TrackingType
+        @create
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    updateTrackingType(id: ID!, name: String!): TrackingType
+        @update
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    deleteTrackingType(id: ID!): TrackingType
+        @delete
+        @guard(with: ["api"])
+        @can(ability: "delete")
+}
+
+extend type Query {
+    categories: [Category] @all @guard(with: ["api"])
+    category(id: ID @eq): Category @find @guard(with: ["api"])
+
+    agencies: [Agency] @all @guard(with: ["api"])
+    agency(id: ID @eq): Agency @find @guard(with: ["api"])
+}

@@ -1,0 +1,103 @@
+type Contact {
+    id: ID!
+    name: String!
+    dni: String!
+    phone: String
+    email: String
+    family: String
+    place: String
+    ministerial_area: String
+    description: String
+    additional_note: String
+    trackings: [Tracking] @hasMany
+    images: [Image] @belongsToMany
+    categories: [Category] @belongsToMany
+}
+
+input CreateContactInput {
+    name: String!
+    dni: String!
+    phone: String
+    email: String
+    family: String
+    place: String
+    ministerial_area: String
+    description: String
+    additional_note: String
+    images: ContactImageInput
+    categories: CategoryContactInput
+}
+
+input UpdateContactInput {
+    id: ID!
+    name: String
+    dni: String
+    phone: String
+    email: String
+    family: String
+    place: String
+    ministerial_area: String
+    description: String
+    additional_note: String
+    images: ContactImageInput
+    categories: CategoryContactInput
+}
+
+input ContactImageInput {
+    connect: [ID]
+    disconnect: [ID]
+}
+
+input CategoryContactInput {
+    connect: [ID]
+    disconnect: [ID]
+}
+
+extend type Mutation {
+    # Contact
+    createContact(input: CreateContactInput! @spread): Contact
+        @create
+        @guard(with: ["api"])
+        @can(ability: "create")
+
+    updateContact(input: UpdateContactInput! @spread): Contact
+        @update
+        @guard(with: ["api"])
+        @can(ability: "update", find: "id")
+
+    deleteContact(id: ID! @rules(apply: ["required"])): Contact
+        @delete
+        @guard(with: ["api"])
+        @can(ability: "delete", find: "id")
+
+    # deleteContacts(ids: [Int]): [Contact] @can(ability: "delete") @guard(with: ["api"])
+}
+
+extend type Query {
+    # # Contact
+    contactWhere(
+        where: _
+            @whereConditions(
+                columns: [
+                    "name"
+                    "dni"
+                    "phone"
+                    "email"
+                    "family"
+                    "place"
+                    "ministerial_area"
+                    "description"
+                    "additional_note"
+                ]
+            )
+    ): Contact @find @softDeletes @guard(with: ["api"])
+
+    contacts: [Contact] @all @softDeletes @guard(with: ["api"])
+
+    # contacts: [Contact] @all @softDeletes
+    contact(id: ID @eq): Contact @find @softDeletes @guard(with: ["api"])
+
+    contactByCategory(
+        categories: _ @whereHasConditions(columns: ["id", "name"])
+    ): [Contact] @all @softDeletes @guard(with: ["api"])
+}

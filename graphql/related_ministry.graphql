@@ -1,0 +1,83 @@
+type RelatedMinistry {
+    id: ID!
+    ministry: String
+    purpose: String
+    collaboration: String
+    resources: String
+    categories: [Category] @belongsToMany
+    contacts: [Contact] @belongsToMany
+}
+
+input CreateRelatedMinistryInput {
+    ministry: String
+    purpose: String
+    collaboration: String
+    resources: String
+    categories: CategoryRelatedInput
+    contacts: ContactRelatedInput
+}
+
+input UpdateRelatedMinistryInput {
+    id: ID!
+    ministry: String
+    purpose: String
+    collaboration: String
+    resources: String
+    categories: CategoryRelatedInput
+    contacts: ContactRelatedInput
+}
+
+input CategoryRelatedInput {
+    connect: [ID]
+    disconnect: [ID]
+}
+
+input ContactRelatedInput {
+    connect: [ID]
+    disconnect: [ID]
+}
+
+extend type Mutation {
+    # RelatedMinistry
+    createRelatedMinistry(
+        input: CreateRelatedMinistryInput! @spread
+    ): RelatedMinistry @create @can(ability: "create") @guard(with: ["api"])
+
+    updateRelatedMinistry(
+        input: UpdateRelatedMinistryInput! @spread
+    ): RelatedMinistry
+        @update
+        @can(ability: "update", find: "id")
+        @guard(with: ["api"])
+
+    deleteRelatedMinistry(id: ID! @rules(apply: ["required"])): RelatedMinistry
+        @delete
+        @can(ability: "delete", find: "id")
+        @guard(with: ["api"])
+
+    # deleteRelatedMinistrys(ids: [Int]): [RelatedMinistry] @can(ability: "delete") @guard(with: ["api"])
+}
+
+extend type Query {
+    # # RelatedMinistry
+    relatedMinistryWhere(
+        where: _
+            @whereConditions(
+                columns: [
+                    "id"
+                    "date"
+                    "observation"
+                    "pending_task"
+                    "ministerial_activity"
+                ]
+            )
+    ): RelatedMinistry @find @softDeletes @guard(with: ["api"])
+
+    relatedMinistries: [RelatedMinistry] @all @softDeletes @guard(with: ["api"])
+
+    # relatedMinistries: [RelatedMinistry] @all @softDeletes
+    relatedMinistry(id: ID @eq): RelatedMinistry
+        @find
+        @softDeletes
+        @guard(with: ["api"])
+}
