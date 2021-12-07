@@ -15,13 +15,13 @@
             type="module"
             crossorigin
 
-            src="https://apoyocubahabana.herokuapp.com/assets/js/index.31fc4aa8.js"
-            {{-- src="http://graph-tracking-api.test/assets/js/index.31fc4aa8.js" --}}
+            src="https://apoyocubahabana.herokuapp.com/assets/js/index.2af2c047.js"
+            {{-- src="http://graph-tracking-api.test/assets/js/index.2af2c047.js" --}}
         ></script>
         <link
             rel="modulepreload"
-            href="https://apoyocubahabana.herokuapp.com/assets/js/vendor.7598227f.js"
-            {{-- href="http://graph-tracking-api.test/assets/js/vendor.7598227f.js" --}}
+            href="https://apoyocubahabana.herokuapp.com/assets/js/vendor.513be071.js"
+            {{-- href="http://graph-tracking-api.test/assets/js/vendor.513be071.js" --}}
 
         />
         <link
