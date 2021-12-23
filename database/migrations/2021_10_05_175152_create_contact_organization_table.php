@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContactSponsorTable extends Migration
+class CreateContactOrganizationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateContactSponsorTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact_sponsor', function (Blueprint $table) {
+        Schema::create('contact_organization', function (Blueprint $table) {
             $table->unsignedBigInteger('contact_id');
-            $table->unsignedBigInteger('sponsor_id');
+            $table->unsignedBigInteger('organization_id');
 
+            // LLAVES FORANEAS
             $table->foreign('contact_id')->references('id')->on('contacts')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('sponsor_id')->references('id')->on('sponsors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateContactSponsorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_sponsor');
+        Schema::dropIfExists('contact_organization');
     }
 }

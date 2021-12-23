@@ -1,75 +1,76 @@
 type Tracking {
+    tracking_type: String
     date: Date
     observation: String
     pending_task: String
     ministerial_activity: String
-    tracking_type: TrackingType @belongsTo
     contact: Contact @belongsTo
 }
 
-input CreateTrackingInput{
+input CreateTrackingInput {
+    tracking_type: String
     date: Date
     observation: String
     pending_task: String
     ministerial_activity: String
-    tracking_type: TrackingTypeInput
     contact: ContactTrackingInput
 }
 
-input UpdateTrackingInput{
+input UpdateTrackingInput {
     id: ID!
+    tracking_type: String
     date: Date
     observation: String
     pending_task: String
     ministerial_activity: String
-    tracking_type: TrackingTypeInput
-    contact: ContactTrackingInput 
+    contact: ContactTrackingInput
 }
 
-input TrackingTypeInput{
+input ContactTrackingInput {
     connect: ID
     disconnect: ID
 }
-
-input ContactTrackingInput{
-    connect: ID
-    disconnect: ID
-}
-
 
 extend type Mutation {
-	# Tracking
-	createTracking(input: CreateTrackingInput! @spread): Tracking @create @can(ability: "create") @guard(with: ["api"])
+    # Tracking
+    createTracking(input: CreateTrackingInput! @spread): Tracking
+        @create
+        @can(ability: "create")
+        @guard(with: ["api"])
 
-	updateTracking(input: UpdateTrackingInput! @spread): Tracking @update  @can(ability: "update", find: "id") @guard(with: ["api"])
+    updateTracking(input: UpdateTrackingInput! @spread): Tracking
+        @update
+        @can(ability: "update", find: "id")
+        @guard(with: ["api"])
 
-	deleteTracking(id: ID! @rules(apply: ["required"])): Tracking @delete @can(ability: "delete", find: "id") @guard(with: ["api"])
+    deleteTracking(id: ID! @rules(apply: ["required"])): Tracking
+        @delete
+        @can(ability: "delete", find: "id")
+        @guard(with: ["api"])
 
-	# deleteTrackings(ids: [Int]): [Tracking] @can(ability: "delete") @guard(with: ["api"])
+    # deleteTrackings(ids: [Int]): [Tracking] @can(ability: "delete") @guard(with: ["api"])
 }
 
 extend type Query {
-	# # Tracking
-	trackingWhere(
-	where: _
-	@whereConditions(
-	columns: [
-	    "id"
-        "date"
-        "observation"
-        "pending_task"
-        "ministerial_activity"
-	]
-	)
-	): Tracking @find @softDeletes @guard(with: ["api"])
+    # # Tracking
+    trackingWhere(
+        where: _
+            @whereConditions(
+                columns: [
+                    "id"
+                    "date"
+                    "observation"
+                    "pending_task"
+                    "ministerial_activity"
+                ]
+            )
+    ): Tracking @find @softDeletes @guard(with: ["api"])
 
-	trackings: [Tracking] @paginate(type: "paginator" model: "App\\Models\\Tracking") @softDeletes @guard(with: ["api"])
+    trackings: [Tracking]
+        @paginate(type: "paginator", model: "App\\Models\\Tracking")
+        @softDeletes
+        @guard(with: ["api"])
 
-	# trackings: [Tracking] @all @softDeletes
-	tracking(id: ID @eq): Tracking @find @softDeletes @guard(with: ["api"])
+    # trackings: [Tracking] @all @softDeletes
+    tracking(id: ID @eq): Tracking @find @softDeletes @guard(with: ["api"])
 }
-
-
-
-
-

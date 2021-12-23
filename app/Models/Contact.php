@@ -26,14 +26,17 @@ class Contact extends Model
 
         'name',
         'dni',
-        // 'personal_photo',
         'phone',
         'email',
         'family',
-        // 'family_photo',
         'place',
         'ministerial_area',
         'description',
+        'commitment',
+        'profession',
+        'vocational_category',
+        'ministerial_passion',
+        'interest_group',
         'additional_note'
 
     ];
@@ -53,15 +56,4 @@ class Contact extends Model
     {
         return $this->hasMany(Tracking::class);
     }
-
-    // public function foreign_missions(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(ForeignMission::class);
-    // }
-
-    // public function related_ministries(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(RelatedMinistry::class);
-    // }
-
 }

@@ -1,0 +1,82 @@
+type Organization {
+    id: ID!
+    name: String
+    purpose: String
+    collaboration: String
+    resources: String
+    categories: [Category] @belongsToMany
+    contacts: [Contact] @belongsToMany
+}
+
+input CreateOrganizationInput {
+    name: String
+    purpose: String
+    collaboration: String
+    resources: String
+    categories: CategoryOrganizationInput
+    contacts: ContactOrganizationInput
+}
+
+input UpdateOrganizationInput {
+    id: ID!
+    name: String
+    purpose: String
+    collaboration: String
+    resources: String
+    categories: CategoryOrganizationInput
+    contacts: ContactOrganizationInput
+}
+
+input CategoryOrganizationInput {
+    connect: [ID]
+    disconnect: [ID]
+}
+
+input ContactOrganizationInput {
+    connect: [ID]
+    disconnect: [ID]
+}
+
+extend type Mutation {
+    # Organization
+    createOrganization(input: CreateOrganizationInput! @spread): Organization
+        @create
+        @can(ability: "create")
+        @guard(with: ["api"])
+
+    updateOrganization(input: UpdateOrganizationInput! @spread): Organization
+        @update
+        @can(ability: "update", find: "id")
+        @guard(with: ["api"])
+
+    deleteOrganization(id: ID! @rules(apply: ["required"])): Organization
+        @delete
+        @can(ability: "delete", find: "id")
+        @guard(with: ["api"])
+
+    # deleteOrganizations(ids: [Int]): [Organization] @can(ability: "delete") @guard(with: ["api"])
+}
+
+extend type Query {
+    # # Organization
+    organizationWhere(
+        where: _
+            @whereConditions(
+                columns: [
+                    "id"
+                    "date"
+                    "observation"
+                    "pending_task"
+                    "ministerial_activity"
+                ]
+            )
+    ): Organization @find @softDeletes @guard(with: ["api"])
+
+    organizations: [Organization] @all @softDeletes @guard(with: ["api"])
+
+    # organizations: [Organization] @all @softDeletes
+    organization(id: ID @eq): Organization
+        @find
+        @softDeletes
+        @guard(with: ["api"])
+}

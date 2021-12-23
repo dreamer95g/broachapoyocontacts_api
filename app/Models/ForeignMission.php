@@ -9,6 +9,7 @@ use App\Models\Nomenclators\Agency;
 use App\Models\Missionary;
 use App\Models\Contact;
 use App\Models\Nomenclators\Category;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ForeignMission extends Model
@@ -20,29 +21,28 @@ class ForeignMission extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-
-        'cuban_ministry',
-        'representative',
+        'name',
+        'campus',
+        'agency',
+        //este es el representante
+        //que a su vez es un contacto
+        'contact_id',
+        'purpose',
         'ministerial_focus',
         'capacitation_resources',
-        'purpose',
         'resources',
-        'global_opportunities',
-
+        'global_opportunities'
     ];
 
+
     // RELACIONES
-    public function agencies(): BelongsToMany
+
+    public function contact(): BelongsTo
     {
-        return $this->belongsToMany(Agency::class);
+        return $this->belongsTo(Contact::class);
     }
 
     public function missionaries(): BelongsToMany
-    {
-        return $this->belongsToMany(Missionary::class);
-    }
-
-    public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class);
     }

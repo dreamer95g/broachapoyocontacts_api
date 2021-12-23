@@ -1,165 +1,108 @@
-type Missionary{
+type ForeignMission {
     id: ID!
-    profession: String,
-    vocational_category: String,
-    ministerial_passion: String
-    interest_group: String,
+    name: String!
+    campus: String
+    agency: String
+    purpose: String
+    ministerial_focus: String
+    capacitation_resources: String
+    resources: String
+    global_opportunities: String
     contact: Contact @belongsTo
+    missionaries: [Contact] @belongsToMany
+    categories: [Category] @belongsToMany
 }
 
-input CreateMissionaryInput{
-    profession: String,
-    vocational_category: String,
-    ministerial_passion: String
-    interest_group: String,
-    contact: ContactMissionaryInput
+input CreateForeignMissionInput {
+    name: String!
+    campus: String
+    agency: String
+    purpose: String
+    ministerial_focus: String
+    capacitation_resources: String
+    resources: String
+    global_opportunities: String
+    contact: RepresentativeForeignInput
+    missionaries: MissionariesForeignInput
+    categories: CategoryForeignInput
 }
 
-input UpdateMissionaryInput{
+input UpdateForeignMissionInput {
     id: ID!
-    profession: String,
-    vocational_category: String,
-    ministerial_passion: String
-    interest_group: String,
-    contact: ContactMissionaryInput
+    name: String!
+    campus: String
+    agency: String
+    purpose: String
+    ministerial_focus: String
+    capacitation_resources: String
+    resources: String
+    global_opportunities: String
+    contact: RepresentativeForeignInput
+    missionaries: MissionariesForeignInput
+    categories: CategoryForeignInput
 }
 
-input ContactMissionaryInput{
+input RepresentativeForeignInput {
     connect: ID
     disconnect: ID
 }
 
-type ForeignMission{
-    id: ID!,
-    cuban_ministry: String
-    representative: String,
-    ministerial_focus: String,
-    capacitation_resources: String,
-    purpose: String,
-    resources: String,
-    global_opportunities: String,
-    agencies: [Agency] @belongsToMany,
-    missionaries: [Missionary] @belongsToMany,
-    contacts: [Contact] @belongsToMany,
-    categories: [Category] @belongsToMany
-}
-
-input CreateForeignMissionInput{
-    cuban_ministry: String
-    representative: String,
-    ministerial_focus: String,
-    capacitation_resources: String,
-    purpose: String,
-    resources: String,
-    global_opportunities: String,
-    agencies: AgencyForeignInput,
-    missionaries: MissionaryForeignInput,
-    contacts: ContactForeignInput,
-    categories: CategoryForeignInput
-}
-
-input UpdateForeignMissionInput{
-    id: ID!
-    cuban_ministry: String,
-    representative: String,
-    ministerial_focus: String,
-    capacitation_resources: String,
-    purpose: String,
-    resources: String,
-    global_opportunities: String,
-    agencies: AgencyForeignInput,
-    missionaries: MissionaryForeignInput,
-    contacts: ContactForeignInput,
-    categories: CategoryForeignInput
-}
-
-input AgencyForeignInput{
+input MissionariesForeignInput {
     connect: [ID]
     disconnect: [ID]
 }
 
-input MissionaryForeignInput{
+input CategoryForeignInput {
     connect: [ID]
     disconnect: [ID]
 }
-
-input ContactForeignInput{
-    connect: [ID]
-    disconnect: [ID]
-}
-
-input CategoryForeignInput{
-   connect: [ID]
-    disconnect: [ID]
-}
-
 
 extend type Mutation {
+    # ForeignMission
+    createForeignMission(
+        input: CreateForeignMissionInput! @spread
+    ): ForeignMission @create @guard(with: ["api"]) @can(ability: "create")
 
-    # Missionary
-    createMissionary(input: CreateMissionaryInput! @spread): Missionary @create @guard(with: ["api"]) @can(ability: "create")
+    updateForeignMission(
+        input: UpdateForeignMissionInput! @spread
+    ): ForeignMission
+        @update
+        @guard(with: ["api"])
+        @can(ability: "update", find: "id")
 
-	updateMissionary(input: UpdateMissionaryInput! @spread): Missionary @update @guard(with: ["api"])  @can(ability: "update", find: "id")
+    deleteForeignMission(id: ID! @rules(apply: ["required"])): ForeignMission
+        @delete
+        @guard(with: ["api"])
+        @can(ability: "delete", find: "id")
 
-	deleteMissionary(id: ID! @rules(apply: ["required"])): Missionary @delete @guard(with: ["api"]) @can(ability: "delete", find: "id")
-
-	# deleteMissionary(ids: [Int]): [Missionary] @can(ability: "delete") @guard(with: ["api"])
-
-	# ForeignMission
-	createForeignMission(input: CreateForeignMissionInput! @spread): ForeignMission @create @guard(with: ["api"]) @can(ability: "create")
-
-	updateForeignMission(input: UpdateForeignMissionInput! @spread): ForeignMission @update @guard(with: ["api"])  @can(ability: "update", find: "id")
-
-	deleteForeignMission(id: ID! @rules(apply: ["required"])): ForeignMission @delete @guard(with: ["api"]) @can(ability: "delete", find: "id")
-
-	# deleteForeignMissions(ids: [Int]): [ForeignMission] @can(ability: "delete") @guard(with: ["api"])
+    # deleteForeignMissions(ids: [Int]): [ForeignMission] @can(ability: "delete") @guard(with: ["api"])
 }
 
 extend type Query {
-
-    #Missionary
-    missionaryWhere(
-	where: _
-	@whereConditions(
-	columns: [
-        "profession"
-        "vocational_category"
-        "ministerial_passion"
-        "interest_group"
-        ]
-	)
-	): Missionary @find @softDeletes @guard(with: ["api"])
-
-	missionaries: [Missionary] @paginate(type: "paginator" model: "App\\Models\\Missionary") @softDeletes @guard(with: ["api"])
-
-	# missionaries: [Missionary] @all @softDeletes
-	missionary(id: ID @eq): Missionary @find @softDeletes @guard(with: ["api"])
-
-   
     # ForeignMission
-	foreignMissionWhere(
-	where: _
-	@whereConditions(
-	columns: [
-        "cuban_ministry"
-        "representative"
-        "ministerial_focus"
-        "capacitation_resources"
-        "purpose"
-        "resources"
-        "global_opportunities"
-	]
-	)
-	): ForeignMission @find @softDeletes @guard(with: ["api"])
+    foreignMissionWhere(
+        where: _
+            @whereConditions(
+                columns: [
+                    "name"
+                    "campus"
+                    "agency"
+                    "contact_id"
+                    "purpose"
+                    "ministerial_focus"
+                    "capacitation_resources"
+                    "resources"
+                    "global_opportunities"
+                ]
+            )
+    ): ForeignMission @find @softDeletes @guard(with: ["api"])
 
-	foreignMissions: [ForeignMission] @paginate(type: "paginator" model: "App\\Models\\ForeignMission") @softDeletes @guard(with: ["api"])
+    # foreignMissions: [ForeignMission] @all @softDeletes @guard(with: ["api"])
 
-	# foreignMissions: [ForeignMission] @all @softDeletes
-	foreignMission(id: ID @eq): ForeignMission @find @softDeletes @guard(with: ["api"])
+    foreignMissions: [ForeignMission] @all @softDeletes @guard(with: ["api"])
+
+    foreignMission(id: ID @eq): ForeignMission
+        @find
+        @softDeletes
+        @guard(with: ["api"])
 }
-
-
-
-
-
-

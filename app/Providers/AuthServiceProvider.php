@@ -18,17 +18,13 @@ class AuthServiceProvider extends ServiceProvider
 
         // NOMENCLADORES
         'App\Models\Nomenclators\Role' => 'App\Policies\Nomenclators\RolePolicy',
-        'App\Models\Nomenclators\Agency' => 'App\Policies\Nomenclators\AgencyPolicy',
         'App\Models\Nomenclators\Category' => 'App\Policies\Nomenclators\CategoryPolicy',
-        'App\Models\Nomenclators\TrackingType' => 'App\Policies\Nomenclators\TrackingTypePolicy',
 
         //MODELS
         'App\Models\Contact' => 'App\Policies\ContactPolicy',
-        'App\Models\Missionary' => 'App\Policies\MissionaryPolicy',
         'App\Models\ForeignMission' => 'App\Policies\ForeignMissionPolicy',
-        'App\Models\Sponsor' => 'App\Policies\SponsorPolicy',
-        'App\Models\Offering' => 'App\Policies\OfferingPolicy',
-        'App\Models\RelatedMinistry' => 'App\Policies\RelatedMinistryPolicy',
+
+        'App\Models\Organization' => 'App\Policies\OrganizationPolicy',
 
         // IMAGE
         'App\Models\Media\Image' => 'App\Policies\Media\ImagePolicy',

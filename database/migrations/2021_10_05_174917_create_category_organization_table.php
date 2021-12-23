@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryRelatedMinistryTable extends Migration
+class CreateCategoryOrganizationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCategoryRelatedMinistryTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_related_ministry', function (Blueprint $table) {
+        Schema::create('category_organization', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('related_ministry_id');
+            $table->unsignedBigInteger('organization_id');
 
-            // LLAVES FORANEAS 
+            // LLAVES FORANEAS
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('related_ministry_id')->references('id')->on('related_ministries')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateCategoryRelatedMinistryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_related_ministry');
+        Schema::dropIfExists('category_organization');
     }
 }

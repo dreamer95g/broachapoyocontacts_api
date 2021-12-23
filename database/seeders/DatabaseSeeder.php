@@ -21,14 +21,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategoriesTableSeeder::class);
 
-        $this->call(TrackingTypesTableSeeder::class);
-
-        $this->call(AgenciesTableSeeder::class);
-
         $this->call(UsersTableSeeder::class);
 
 
         //  PONER EL ROL DE ADMIN AL USUARIO
         DB::insert(' insert into role_user (role_id, user_id) values (?, ?) ', [1, 1]);
+        DB::insert(' insert into role_user (role_id, user_id) values (?, ?) ', [1, 2]);
+        DB::insert(' insert into role_user (role_id, user_id) values (?, ?) ', [1, 3]);
     }
 }

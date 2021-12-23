@@ -1,13 +1,18 @@
 type Contact {
     id: ID!
     name: String!
-    dni: String!
+    dni: String
     phone: String
     email: String
     family: String
     place: String
     ministerial_area: String
     description: String
+    commitment: String
+    profession: String
+    vocational_category: String
+    ministerial_passion: String
+    interest_group: String
     additional_note: String
     trackings: [Tracking] @hasMany
     images: [Image] @belongsToMany
@@ -16,13 +21,18 @@ type Contact {
 
 input CreateContactInput {
     name: String!
-    dni: String!
+    dni: String
     phone: String
     email: String
     family: String
     place: String
     ministerial_area: String
     description: String
+    commitment: String
+    profession: String
+    vocational_category: String
+    ministerial_passion: String
+    interest_group: String
     additional_note: String
     images: ContactImageInput
     categories: CategoryContactInput
@@ -38,6 +48,11 @@ input UpdateContactInput {
     place: String
     ministerial_area: String
     description: String
+    commitment: String
+    profession: String
+    vocational_category: String
+    ministerial_passion: String
+    interest_group: String
     additional_note: String
     images: ContactImageInput
     categories: CategoryContactInput
@@ -87,6 +102,11 @@ extend type Query {
                     "place"
                     "ministerial_area"
                     "description"
+                    "commitment"
+                    "profession"
+                    "vocational_category"
+                    "ministerial_passion"
+                    "interest_group"
                     "additional_note"
                 ]
             )

@@ -1,4 +1,3 @@
-
 #import auth.graphql
 #import user.graphql
 #import image.graphql
@@ -6,9 +5,7 @@
 #import contact.graphql
 #import tracking.graphql
 #import foreign_mission.graphql
-#import related_ministry.graphql
-#import sponsor.graphql
-
+#import organization.graphql
 
 "A date string with format `Y-m-d`, e.g. `2011-05-23`."
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
@@ -27,4 +24,3 @@ scalar Upload
 
 type Query
 type Mutation
-

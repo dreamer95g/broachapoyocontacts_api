@@ -19,7 +19,7 @@ class Tracking extends Model
 
     protected $fillable = [
 
-        'tracking_type_id',
+        'tracking_type',
         'date',
         'observation',
         'pending_task',
@@ -31,10 +31,5 @@ class Tracking extends Model
     public function contact(): BelongsTo
     {
         return $this->belongsTo(Contact::class);
-    }
-
-    public function tracking_type(): BelongsTo
-    {
-        return $this->belongsTo(TrackingType::class);
     }
 }

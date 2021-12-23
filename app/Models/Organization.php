@@ -3,29 +3,28 @@
 namespace App\Models;
 
 use App\Models\Nomenclators\Category;
-use App\Models\Offering;
+use App\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Sponsor extends Model
+class Organization  extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'sponsors';
+    protected $table = 'organizations';
 
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
 
         'name',
-        'commitment',
-        'communication',
-        'contact_id'
+        'purpose',
+        'collaboration',
+        'resources'
     ];
+
 
     // RELACIONES
     public function categories(): BelongsToMany
@@ -36,10 +35,5 @@ class Sponsor extends Model
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class);
-    }
-
-    public function offerings(): HasMany
-    {
-        return $this->hasMany(Offering::class);
     }
 }

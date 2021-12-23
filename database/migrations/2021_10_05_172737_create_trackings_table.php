@@ -15,7 +15,7 @@ class CreateTrackingsTable extends Migration
     {
         Schema::create('trackings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tracking_type_id');
+            $table->string('tracking_type');
             $table->date('date');
             $table->text('observation');
             $table->string('pending_task');
@@ -26,7 +26,6 @@ class CreateTrackingsTable extends Migration
             $table->softDeletes();
 
             //LLAVES FORANEAS
-            $table->foreign('tracking_type_id')->references('id')->on('tracking_types')->onUpdate('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onUpdate('cascade')->onDelete('cascade');
         });
     }
