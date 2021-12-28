@@ -70,13 +70,13 @@ extend type Query {
                     "ministerial_activity"
                 ]
             )
-    ): Organization @find @softDeletes @guard(with: ["api"])
+    ): Organization @find  @guard(with: ["api"])
 
-    organizations: [Organization] @all @softDeletes @guard(with: ["api"])
+    organizations: [Organization] @all  @guard(with: ["api"])
 
-    # organizations: [Organization] @all @softDeletes
+    # organizations: [Organization] @all
     organization(id: ID @eq): Organization
         @find
-        @softDeletes
+
         @guard(with: ["api"])
 }

@@ -1,4 +1,5 @@
 type Tracking {
+    id: ID!
     tracking_type: String
     date: Date
     observation: String
@@ -59,18 +60,20 @@ extend type Query {
                 columns: [
                     "id"
                     "date"
+                    "tracking_type"
                     "observation"
                     "pending_task"
                     "ministerial_activity"
                 ]
             )
-    ): Tracking @find @softDeletes @guard(with: ["api"])
+    ): Tracking @find  @guard(with: ["api"])
 
-    trackings: [Tracking]
-        @paginate(type: "paginator", model: "App\\Models\\Tracking")
-        @softDeletes
-        @guard(with: ["api"])
+    # trackings: [Tracking]
+    #     @paginate(type: "paginator", model: "App\\Models\\Tracking")
+    #
+    #     @guard(with: ["api"])
 
-    # trackings: [Tracking] @all @softDeletes
-    tracking(id: ID @eq): Tracking @find @softDeletes @guard(with: ["api"])
+    trackings: [Tracking] @all  @guard(with: ["api"])
+
+    tracking(id: ID @eq): Tracking @find  @guard(with: ["api"])
 }

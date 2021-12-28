@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ForeignMission extends Model
 {
-    use HasFactory, SoftDeletes;
+    // use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'foreign_missions';
 

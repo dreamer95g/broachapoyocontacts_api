@@ -21,7 +21,7 @@ class CreateOrganizationsTable extends Migration
             $table->text('resources');
 
             $table->timestamps();
-            $table->softDeletes();
+             $table->softDeletes();
         });
     }
 

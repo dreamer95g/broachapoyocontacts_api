@@ -19,7 +19,7 @@ class CreateContactImageTable extends Migration
 
             $table->foreign('image_id')->references('id')->on('images')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onUpdate('cascade')->onDelete('cascade');
-            // $table->timestamps();
+
         });
     }
 

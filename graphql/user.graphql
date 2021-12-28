@@ -27,12 +27,12 @@ input UserImageInput {
 extend type Query {
     users(orderBy: _ @orderBy(columns: ["created_at"])): [User]
         @all
-        @softDeletes
+
         @guard(with: ["api"])
         @can(ability: "view")
     user(id: ID @eq): User
         @find
-        @softDeletes
+
         @guard(with: ["api"])
         @can(ability: "view")
     me: User @guard(with: ["api"]) @auth

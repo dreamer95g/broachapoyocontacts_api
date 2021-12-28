@@ -23,7 +23,7 @@ class CreateTrackingsTable extends Migration
             $table->unsignedBigInteger('contact_id');
 
             $table->timestamps();
-            $table->softDeletes();
+             $table->softDeletes();
 
             //LLAVES FORANEAS
             $table->foreign('contact_id')->references('id')->on('contacts')->onUpdate('cascade')->onDelete('cascade');
