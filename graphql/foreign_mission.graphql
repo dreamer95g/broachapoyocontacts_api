@@ -29,7 +29,7 @@ input CreateForeignMissionInput {
 
 input UpdateForeignMissionInput {
     id: ID!
-    name: String!
+    name: String
     campus: String
     agency: String
     purpose: String
@@ -44,7 +44,6 @@ input UpdateForeignMissionInput {
 
 input RepresentativeForeignInput {
     connect: ID
-    disconnect: ID
 }
 
 input MissionariesForeignInput {
@@ -95,11 +94,11 @@ extend type Query {
                     "global_opportunities"
                 ]
             )
-    ): ForeignMission @find @softDeletes  @guard(with: ["api"])
+    ): ForeignMission @find @softDeletes @guard(with: ["api"])
 
     # foreignMissions: [ForeignMission] @all  @guard(with: ["api"])
 
-    foreignMissions: [ForeignMission] @all @softDeletes  @guard(with: ["api"])
+    foreignMissions: [ForeignMission] @all @softDeletes @guard(with: ["api"])
 
     foreignMission(id: ID @eq): ForeignMission
         @find

@@ -110,12 +110,12 @@ extend type Query {
                     "additional_note"
                 ]
             )
-    ): Contact @find @softDeletes  @guard(with: ["api"])
+    ): Contact @find @softDeletes @guard(with: ["api"])
 
-                contacts: [Contact] @all @softDeletes  @guard(with: ["api"])
+    contacts: [Contact] @all @softDeletes @guard(with: ["api"])
 
     # contacts: [Contact] @all
-    contact(id: ID @eq): Contact @find @softDeletes  @guard(with: ["api"])
+    contact(id: ID @eq): Contact @find @softDeletes @guard(with: ["api"])
 
     contactByCategory(
         categories: _ @whereHasConditions(columns: ["id", "name"])
