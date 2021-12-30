@@ -15,8 +15,8 @@
             type="module"
             crossorigin
 
-            src="https://apoyocubahabana.herokuapp.com/assets/js/index.92a423fc.js"
-            {{-- src="http://graph-tracking-api.test/assets/js/index.92a423fc.js" --}}
+            src="https://apoyocubahabana.herokuapp.com/assets/js/index.e5a53c0c.js"
+            {{-- src="http://graph-tracking-api.test/assets/js/index.e5a53c0c.js" --}}
         ></script>
         <link
             rel="modulepreload"
