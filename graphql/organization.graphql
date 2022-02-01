@@ -2,8 +2,11 @@ type Organization {
     id: ID!
     name: String
     purpose: String
-    collaboration: String
+    phone: String
+    email: String
+    place: String
     resources: String
+    relationship: String
     categories: [Category] @belongsToMany
     contacts: [Contact] @belongsToMany
 }
@@ -11,8 +14,11 @@ type Organization {
 input CreateOrganizationInput {
     name: String
     purpose: String
-    collaboration: String
+    phone: String
+    email: String
+    place: String
     resources: String
+    relationship: String
     categories: CategoryOrganizationInput
     contacts: ContactOrganizationInput
 }
@@ -21,8 +27,11 @@ input UpdateOrganizationInput {
     id: ID!
     name: String
     purpose: String
-    collaboration: String
+    phone: String
+    email: String
+    place: String
     resources: String
+    relationship: String
     categories: CategoryOrganizationInput
     contacts: ContactOrganizationInput
 }
@@ -59,24 +68,12 @@ extend type Mutation {
 
 extend type Query {
     # # Organization
-    organizationWhere(
-        where: _
-            @whereConditions(
-                columns: [
-                    "id"
-                    "date"
-                    "observation"
-                    "pending_task"
-                    "ministerial_activity"
-                ]
-            )
-    ): Organization @find  @guard(with: ["api"])
+    organizationWhere(where: _ @whereConditions(columns: ["id"])): Organization
+        @find
+        @guard(with: ["api"])
 
-    organizations: [Organization] @all  @guard(with: ["api"])
+    organizations: [Organization] @all @guard(with: ["api"])
 
     # organizations: [Organization] @all
-    organization(id: ID @eq): Organization
-        @find
-
-        @guard(with: ["api"])
+    organization(id: ID @eq): Organization @find @guard(with: ["api"])
 }

@@ -11,21 +11,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Organization  extends Model
 {
-    // use HasFactory, SoftDeletes;
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'organizations';
-
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-
         'name',
         'purpose',
-        'collaboration',
-        'resources'
+        'phone',
+        'email',
+        'place',
+        'resources',
+        'relationship'
     ];
-
 
     // RELACIONES
     public function categories(): BelongsToMany

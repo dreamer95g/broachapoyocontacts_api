@@ -20,23 +20,23 @@ class UsersTableSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make("superadmin2021"),
+            'password' => Hash::make("superadmin2022"),
             'remember_token' => Str::random(10),
         ]);
 
         User::create([
             'name' => 'Tim Broach',
-            'email' => 'timbroach@gmail.com',
+            'email' => 'tbroach@reachbeyond.org',
             'email_verified_at' => now(),
-            'password' => Hash::make("tim2021"),
+            'password' => Hash::make("tim2022"),
             'remember_token' => Str::random(10),
         ]);
 
         User::create([
             'name' => 'Onilda Broach',
-            'email' => 'onildabroach@gmail.com',
+            'email' => 'onilda@reachbeyond.org',
             'email_verified_at' => now(),
-            'password' => Hash::make("onilda2021"),
+            'password' => Hash::make("onilda2022"),
             'remember_token' => Str::random(10),
         ]);
     }

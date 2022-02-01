@@ -1,28 +1,49 @@
 type ForeignMission {
     id: ID!
     name: String!
-    campus: String
+    place: String
     agency: String
     purpose: String
     ministerial_focus: String
     capacitation_resources: String
     resources: String
     global_opportunities: String
-    contact: Contact @belongsTo
-    missionaries: [Contact] @belongsToMany
+    representatives: [Contact] @belongsToMany
+    missionaries: [Missionary] @belongsToMany
+    categories: [Category] @belongsToMany
+}
+
+type Missionary {
+    id: ID!
+    name: String!
+    dni: String
+    phone: String
+    email: String
+    family: String
+    place: String
+    ministerial_area: String
+    description: String
+    commitment: String
+    profession: String
+    vocational_category: String
+    ministerial_passion: String
+    interest_group: String
+    additional_note: String
+    trackings: [Tracking] @hasMany
+    images: [Image] @belongsToMany
     categories: [Category] @belongsToMany
 }
 
 input CreateForeignMissionInput {
     name: String!
-    campus: String
+    place: String
     agency: String
     purpose: String
     ministerial_focus: String
     capacitation_resources: String
     resources: String
     global_opportunities: String
-    contact: RepresentativeForeignInput
+    representatives: RepresentativeForeignInput
     missionaries: MissionariesForeignInput
     categories: CategoryForeignInput
 }
@@ -30,20 +51,21 @@ input CreateForeignMissionInput {
 input UpdateForeignMissionInput {
     id: ID!
     name: String
-    campus: String
+    place: String
     agency: String
     purpose: String
     ministerial_focus: String
     capacitation_resources: String
     resources: String
     global_opportunities: String
-    contact: RepresentativeForeignInput
+    representatives: RepresentativeForeignInput
     missionaries: MissionariesForeignInput
     categories: CategoryForeignInput
 }
 
 input RepresentativeForeignInput {
-    connect: ID
+    connect: [ID]
+    disconnect: [ID]
 }
 
 input MissionariesForeignInput {
@@ -84,7 +106,7 @@ extend type Query {
             @whereConditions(
                 columns: [
                     "name"
-                    "campus"
+                    "place"
                     "agency"
                     "contact_id"
                     "purpose"

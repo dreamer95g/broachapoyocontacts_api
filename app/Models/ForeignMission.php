@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Nomenclators\Agency;
-use App\Models\Missionary;
 use App\Models\Contact;
 use App\Models\Nomenclators\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,8 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ForeignMission extends Model
 {
-    // use HasFactory, SoftDeletes;
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'foreign_missions';
 
@@ -23,27 +20,23 @@ class ForeignMission extends Model
 
     protected $fillable = [
         'name',
-        'campus',
-        'agency',
-        //este es el representante
-        //que a su vez es un contacto
-        'contact_id',
+        //en esta posicion van los representantes
+        'place',
         'purpose',
+        'agency',
         'ministerial_focus',
         'capacitation_resources',
         'resources',
         'global_opportunities'
+        //candidatos a misioneros esta en el n*n
     ];
+
 
 
     // RELACIONES
 
-    public function contact(): BelongsTo
-    {
-        return $this->belongsTo(Contact::class);
-    }
 
-    public function missionaries(): BelongsToMany
+    public function representatives(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class);
     }
@@ -52,5 +45,10 @@ class ForeignMission extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+       public function missionaries(): BelongsToMany
+    {
+        return $this->belongsToMany(Missionary::class);
     }
 }

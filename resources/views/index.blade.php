@@ -8,26 +8,26 @@
         <link
             rel="icon"
             type="image/svg+xml"
-            href="https://apoyocubahabana.herokuapp.com/assets/images/apoyo_cuba.5fbeaca6.jpg"
-            {{--href="http://graph-tracking-api.test/assets/images/apoyo_cuba.5fbeaca6.jpg" --}}
+            {{-- href="https://apoyocubahabana.herokuapp.com/assets/images/apoyo_cuba.5fbeaca6.jpg" --}}
+            href="http://trackingapi.local/assets/images/apoyo_cuba.5fbeaca6.jpg"
         />
         <script
             type="module"
             crossorigin
 
-            src="https://apoyocubahabana.herokuapp.com/assets/js/index.1538bba7.js"
-            {{-- src="http://graph-tracking-api.test/assets/js/index.1538bba7.js" --}}
+            {{-- src="https://apoyocubahabana.herokuapp.com/assets/js/index.75455a6b.js" --}}
+            src="http://trackingapi.local/assets/js/index.75455a6b.js"
         ></script>
         <link
             rel="modulepreload"
-            href="https://apoyocubahabana.herokuapp.com/assets/js/vendor.0fa1d84e.js"
-            {{-- href="http://graph-tracking-api.test/assets/js/vendor.0fa1d84e.js" --}}
+            {{-- href="https://apoyocubahabana.herokuapp.com/assets/js/vendor.4ca55d5c.js" --}}
+            href="http://trackingapi.local/assets/js/vendor.4ca55d5c.js"
 
         />
         <link
             rel="stylesheet"
-            href="https://apoyocubahabana.herokuapp.com/assets/css/index.4883d1ba.css"
-            {{-- href="http://graph-tracking-api.test/assets/css/index.4883d1ba.css" --}}
+            {{-- href="https://apoyocubahabana.herokuapp.com/assets/css/index.4883d1ba.css" --}}
+            href="http://trackingapi.local/assets/css/index.4883d1ba.css"
         />
     </head>
     <body>
