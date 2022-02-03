@@ -36,20 +36,22 @@ extend type Mutation {
     # Tracking
     createTracking(input: CreateTrackingInput! @spread): Tracking
         @create
-        @can(ability: "create")
         @guard(with: ["api"])
+        @can(ability: "create")
 
     updateTracking(input: UpdateTrackingInput! @spread): Tracking
         @update
-        @can(ability: "update", find: "id")
         @guard(with: ["api"])
+        @can(ability: "update", find: "id")
 
     deleteTracking(id: ID! @rules(apply: ["required"])): Tracking
         @delete
-        @can(ability: "delete", find: "id")
         @guard(with: ["api"])
+        @can(ability: "delete", find: "id")
 
-    # deleteTrackings(ids: [Int]): [Tracking] @can(ability: "delete") @guard(with: ["api"])
+    deleteTrackings(ids: [Int]): [Tracking]
+        @guard(with: ["api"])
+        @can(ability: "delete")
 }
 
 extend type Query {
@@ -66,14 +68,14 @@ extend type Query {
                     "ministerial_activity"
                 ]
             )
-    ): Tracking @find  @guard(with: ["api"])
+    ): Tracking @find @guard(with: ["api"])
 
     # trackings: [Tracking]
     #     @paginate(type: "paginator", model: "App\\Models\\Tracking")
     #
     #     @guard(with: ["api"])
 
-    trackings: [Tracking] @all  @guard(with: ["api"])
+    trackings: [Tracking] @all @guard(with: ["api"])
 
-    tracking(id: ID @eq): Tracking @find  @guard(with: ["api"])
+    tracking(id: ID @eq): Tracking @find @guard(with: ["api"])
 }

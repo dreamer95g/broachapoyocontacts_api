@@ -50,20 +50,22 @@ extend type Mutation {
     # Organization
     createOrganization(input: CreateOrganizationInput! @spread): Organization
         @create
-        @can(ability: "create")
         @guard(with: ["api"])
+        @can(ability: "create")
 
     updateOrganization(input: UpdateOrganizationInput! @spread): Organization
         @update
-        @can(ability: "update", find: "id")
         @guard(with: ["api"])
+        @can(ability: "update", find: "id")
 
     deleteOrganization(id: ID! @rules(apply: ["required"])): Organization
         @delete
-        @can(ability: "delete", find: "id")
         @guard(with: ["api"])
+        @can(ability: "delete", find: "id")
 
-    # deleteOrganizations(ids: [Int]): [Organization] @can(ability: "delete") @guard(with: ["api"])
+    deleteOrganizations(ids: [Int]): [Organization]
+        @guard(with: ["api"])
+        @can(ability: "delete")
 }
 
 extend type Query {

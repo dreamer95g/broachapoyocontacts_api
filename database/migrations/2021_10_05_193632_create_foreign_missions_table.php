@@ -15,10 +15,10 @@ class CreateForeignMissionsTable extends Migration
     {
         Schema::create('foreign_missions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('place');
+            $table->text('name');
+            $table->text('place');
             $table->text('purpose');
-            $table->string('agency');
+            $table->text('agency');
             //este es el representante
             //que a su vez es un contacto
             $table->text('ministerial_focus');

@@ -40,6 +40,10 @@ extend type Mutation {
         @delete
         @guard(with: ["api"])
         @can(ability: "delete")
+
+    deleteCategories(ids: [Int]): [Category]
+        @guard(with: ["api"])
+        @can(ability: "delete")
 }
 
 extend type Query {

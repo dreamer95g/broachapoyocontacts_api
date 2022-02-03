@@ -15,20 +15,20 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('dni');
-            $table->string('phone');
-            $table->string('email');
+            $table->text('name');
+            $table->text('dni');
+            $table->text('phone');
+            $table->text('email');
             $table->text('family');
-            $table->string('place');
-            $table->string('ministerial_area');
+            $table->text('place');
+            $table->text('ministerial_area');
             $table->text('description');
             $table->text('commitment');
             $table->text('profession');
             $table->text('vocational_category');
             $table->text('ministerial_passion');
             $table->text('interest_group');
-            $table->string('additional_note');
+            $table->text('additional_note');
             $table->timestamps();
             $table->softDeletes();
         });

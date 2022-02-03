@@ -96,7 +96,9 @@ extend type Mutation {
         @guard(with: ["api"])
         @can(ability: "delete", find: "id")
 
-    # deleteForeignMissions(ids: [Int]): [ForeignMission] @can(ability: "delete") @guard(with: ["api"])
+    deleteMissions(ids: [Int]): [ForeignMission]
+        @guard(with: ["api"])
+        @can(ability: "delete")
 }
 
 extend type Query {
