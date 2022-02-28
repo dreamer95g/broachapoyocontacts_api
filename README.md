@@ -1,8 +1,8 @@
 <div align="center">
 
-## Graph Tracking API
+## Broach Apoyo Contacts API
 
-Este es una graphql API para el sistema de seguimiento de Apoyo Cuba.
+Este es una graphql API para el sistema de contactos de Apoyo Cuba.
 
 ## Developer
 
