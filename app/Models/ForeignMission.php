@@ -23,7 +23,7 @@ class ForeignMission extends Model
         //en esta posicion van los representantes
         'place',
         'purpose',
-        'agency',
+        'additional_note',
         'ministerial_focus',
         'capacitation_resources',
         'resources',

@@ -2,7 +2,7 @@ type ForeignMission {
     id: ID!
     name: String!
     place: String
-    agency: String
+    additional_note: String
     purpose: String
     ministerial_focus: String
     capacitation_resources: String
@@ -37,7 +37,7 @@ type Missionary {
 input CreateForeignMissionInput {
     name: String!
     place: String
-    agency: String
+    additional_note: String
     purpose: String
     ministerial_focus: String
     capacitation_resources: String
@@ -52,7 +52,7 @@ input UpdateForeignMissionInput {
     id: ID!
     name: String
     place: String
-    agency: String
+    additional_note: String
     purpose: String
     ministerial_focus: String
     capacitation_resources: String
@@ -109,7 +109,7 @@ extend type Query {
                 columns: [
                     "name"
                     "place"
-                    "agency"
+                    "additional_note"
                     "contact_id"
                     "purpose"
                     "ministerial_focus"

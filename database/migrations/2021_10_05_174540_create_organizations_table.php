@@ -19,6 +19,7 @@ class CreateOrganizationsTable extends Migration
             //aki van los representantes
             //pueden estar vacios
             //esta en el n*n con contacto
+            $table->text('additional_note');
             $table->text('purpose');
             $table->text('phone');
             $table->text('email');

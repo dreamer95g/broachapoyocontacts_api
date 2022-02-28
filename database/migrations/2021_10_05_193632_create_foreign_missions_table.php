@@ -18,7 +18,7 @@ class CreateForeignMissionsTable extends Migration
             $table->text('name');
             $table->text('place');
             $table->text('purpose');
-            $table->text('agency');
+            $table->text('additional_note');
             //este es el representante
             //que a su vez es un contacto
             $table->text('ministerial_focus');

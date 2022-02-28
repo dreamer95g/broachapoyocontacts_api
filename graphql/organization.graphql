@@ -1,6 +1,7 @@
 type Organization {
     id: ID!
     name: String
+    additional_note: String
     purpose: String
     phone: String
     email: String
@@ -13,6 +14,7 @@ type Organization {
 
 input CreateOrganizationInput {
     name: String
+    additional_note: String
     purpose: String
     phone: String
     email: String
@@ -26,6 +28,7 @@ input CreateOrganizationInput {
 input UpdateOrganizationInput {
     id: ID!
     name: String
+    additional_note: String
     purpose: String
     phone: String
     email: String

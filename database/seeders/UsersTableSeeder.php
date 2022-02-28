@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Onilda Broach',
-            'email' => 'onilda@reachbeyond.org',
+            'email' => 'ocervantes@reachbeyond.org',
             'email_verified_at' => now(),
             'password' => Hash::make("onilda2022"),
             'remember_token' => Str::random(10),
